@@ -41,7 +41,7 @@ PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 def get_logger() -> logging.Logger:
     """ returns a logging.Logger Object """
-    first_log = logging.getLogger("user_data")
+    first_log = logging.getLogger('user_data')
     first_log.setLevel(logging.INFO)
     first_log.propagate = False
 
@@ -55,10 +55,10 @@ def get_logger() -> logging.Logger:
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """ used to connect to a secure database """
-    connection_db = mysql.connector.connection.MySQLConnection(
+    connect = mysql.connector.connection.MySQLConnection(
         user=getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
         password=getenv('PERSONAL_DATA_DB_PASSWORD', ''),
         host=getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
         database=getenv('PERSONAL_DATA_DB_NAME'))
 
-    return connection_db
+    return connect
