@@ -1,0 +1,2 @@
+Requirement already satisfied: babel in /home/vagrant/.local/lib/python3.8/site-packages (2.7.0)
+Requirement already satisfied: pytz>=2015.7 in /home/vagrant/.local/lib/python3.8/site-packages (from babel) (2022.7.1)
