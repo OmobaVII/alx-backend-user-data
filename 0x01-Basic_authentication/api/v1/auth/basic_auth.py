@@ -95,7 +95,8 @@ class BasicAuth(Auth):
             extract = self.extract_user_credentials(decoded)
             if extract is None:
                 return None
-            user_obj = self.user_object_from_credentials(extract[0], extract[1])
+            user_obj = self.user_object_from_credentials(extract[0],
+                                                         extract[1])
 
             return user_obj
         except Exception:
