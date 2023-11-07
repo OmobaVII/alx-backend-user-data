@@ -2,6 +2,7 @@
 """ This module provides the class Auth """
 from flask import request
 from typing import List, TypeVar
+import fnmatch
 
 
 class Auth:
@@ -17,9 +18,12 @@ class Auth:
             pass
         else:
             p += '/'
-        if p not in excluded_paths:
-            return True
-        return False
+        if p in excluded_paths:
+            return False
+        for excluded_path in excluded_paths:
+            if fnmatch.fnmatch(path, excluded_path):
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """ returns None or flask request object """
