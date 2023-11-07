@@ -1,6 +1,0 @@
-Requirement already satisfied: Flask in /home/vagrant/.local/lib/python3.8/site-packages (1.1.2)
-Requirement already satisfied: Jinja2>=2.10.1 in /home/vagrant/.local/lib/python3.8/site-packages (from Flask) (2.11.2)
-Requirement already satisfied: Werkzeug>=0.15 in /home/vagrant/.local/lib/python3.8/site-packages (from Flask) (3.0.1)
-Requirement already satisfied: click>=5.1 in /home/vagrant/.local/lib/python3.8/site-packages (from Flask) (8.1.7)
-Requirement already satisfied: itsdangerous>=0.24 in /home/vagrant/.local/lib/python3.8/site-packages (from Flask) (2.1.2)
-Requirement already satisfied: MarkupSafe>=0.23 in /home/vagrant/.local/lib/python3.8/site-packages (from Jinja2>=2.10.1->Flask) (2.1.3)
