@@ -10,6 +10,7 @@ from os import getenv
 
 @app_views.route('/auth_session/login', methods=['POST'])
 def auth_session_login():
+    """ adds the view """
     email = request.form.get('email')
     password = request.form.get('password')
 
