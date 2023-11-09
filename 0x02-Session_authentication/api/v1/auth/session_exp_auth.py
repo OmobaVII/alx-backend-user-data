@@ -11,17 +11,15 @@ class SessionExpAuth(SessionAuth):
     """ adds an expiration date to a session id """
     def __init__(self):
         """ defines the class """
-        super().__init__()
         try:
             self.session_duration = int(getenv('SESSION_DURATION'))
-            self.session_duration
         except ValueError:
             self.session_duration = 0
 
     def create_session(self, user_id=None):
         """ creates a session id """
         ses_id = super().create_session(user_id)
-        if not ses_id:
+        if ses_id is None:
             return None
         self.user_id_by_session_id[ses_id] = {
             'user_id': user_id,
