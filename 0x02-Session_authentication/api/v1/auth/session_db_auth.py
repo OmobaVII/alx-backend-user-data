@@ -8,8 +8,6 @@ class SessionDBAuth(SessionExpAuth):
     """ defines the class """
     def create_session(self, user_id=None):
         """ creates and stores new instances of UserSession """
-        if user_id is None:
-            return None
         session_id = super().create_session(user_id)
         if session_id is None:
             return None
@@ -33,7 +31,7 @@ class SessionDBAuth(SessionExpAuth):
 
         exp_time = user_ses.created_at + timedelta(seconds=self.session_duration)
 
-        if exp_time < datetime.utcnow():
+        if exp_time < datetime.now():
             return None
 
         return user_ses.user_id
