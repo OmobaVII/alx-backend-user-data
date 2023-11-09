@@ -13,7 +13,7 @@ class SessionExpAuth(SessionAuth):
         """ defines the class """
         try:
             self.session_duration = int(getenv('SESSION_DURATION'))
-        except ValueError:
+        except Exception:
             self.session_duration = 0
 
     def create_session(self, user_id=None):
@@ -21,7 +21,7 @@ class SessionExpAuth(SessionAuth):
         ses_id = super().create_session(user_id)
         if ses_id is None:
             return None
-        self.user_id_by_session_id[ses_id] = {
+        super().user_id_by_session_id[ses_id] = {
             'user_id': user_id,
             'created_at': datetime.now()
         }
@@ -32,7 +32,7 @@ class SessionExpAuth(SessionAuth):
         """ returns user_id from the sesion dictionary """
         if session_id is None:
             return None
-        ses_dict = self.user_id_by_session_id.get(session_id, None)
+        ses_dict = super().user_id_by_session_id.get(session_id, None)
         if ses_dict is None:
             return None
         if 'created_at' not in ses_dict:
