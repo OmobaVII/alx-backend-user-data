@@ -28,7 +28,9 @@ def auth_session_login():
     for u in user:
         if not u.is_valid_password(password):
             return jsonify({"error": "wrong password"}), 401
+
     from api.v1.app import auth
+
     u = user[0]
     ses_id = auth.create_session(u.id)
     user_dict = u.to_json()
