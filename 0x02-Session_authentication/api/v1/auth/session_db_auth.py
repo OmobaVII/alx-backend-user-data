@@ -33,7 +33,7 @@ class SessionDBAuth(SessionExpAuth):
 
         exp_time = user_ses.created_at + timedelta(seconds=self.session_duration)
 
-        if exp_time < datetime.now():
+        if exp_time < datetime.utcnow():
             return None
 
         return user_ses.user_id
