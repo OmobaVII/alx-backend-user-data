@@ -8,6 +8,8 @@ class SessionDBAuth(SessionExpAuth):
     """ defines the class """
     def create_session(self, user_id=None):
         """ creates and stores new instances of UserSession """
+        if user_id is None:
+            return None
         session_id = super().create_session(user_id)
         if session_id is None:
             return None
@@ -23,9 +25,10 @@ class SessionDBAuth(SessionExpAuth):
         """ returns the User ID by requsting UserSession """
         if session_id is None:
             return None
+
         UserSession.load_from_file()
         user_ses = UserSession.search({'session_id': session_id})
-        if user_ses is None:
+        if not user_ses:
             return None
         user_ses = user_ses[0]
 
@@ -48,12 +51,12 @@ class SessionDBAuth(SessionExpAuth):
 
         user_id = self.user_id_for_session_id(session_id)
 
-        if user_id is None:
+        if not user_id:
             return False
 
         user_ses = UserSession.search({'session_id': session_id})
 
-        if user_ses is None:
+        if not user_ses:
             return False
 
         user_ses = user_ses[0]
