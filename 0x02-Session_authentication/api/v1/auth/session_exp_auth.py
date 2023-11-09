@@ -34,15 +34,16 @@ class SessionExpAuth(SessionAuth):
         """ returns user_id from the sesion dictionary """
         if session_id is None:
             return None
-        if session_id not in self.user_id_by_session_id.get(session_id):
+        ses_dict = self.user_id_by_session_id.get(session_id, None)
+        if ses_dict is None:
+            return None
+        if 'created_at' not int ses_dict:
             return None
         if self.session_duration <= 0:
-            return self.user_id_by_session_id.key.get(session_id).get('user_id')
-        if 'created_at' not in self.user_id_by_session_id.keys():
-            return None
-        created_at = self.user_id_by_session_id['created_at']
+            return ses_dict.get('user_id')
+        created_at = ses_dict['created_at']
         exp_time = created_at + timedelta(seconds=self.session_duration)
 
         if exp_time < datetime.now():
             return None
-        return self.user_id_by_session_id.get(session_id).get('user_id')
+        return ses_dict.get('user_id')
