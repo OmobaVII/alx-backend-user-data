@@ -12,8 +12,9 @@ class SessionExpAuth(SessionAuth):
     def __init__(self):
         """ defines the class """
         super().__init__()
-        if int(getenv('SESSION_DURATION')):
-            self.session_duration = int(getenv('SESSION_DURATION'))
+        session_duration = int(getenv('SESSION_DURATION'))
+        if session_duration:
+            self.session_duration = session_duration
         else:
             self.session_duration = 0
 
