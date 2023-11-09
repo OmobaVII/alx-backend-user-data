@@ -20,13 +20,13 @@ class SessionExpAuth(SessionAuth):
 
     def create_session(self, user_id=None):
         """ creates a session id """
-        ses_id = super().create_session(user_id)
         if not ses_id:
             return None
+        ses_id = super().create_session(user_id)
         session_dict = {}
         session_dict['user_id'] = user_id
         session_dict['created_at'] = datetime.now()
-        self.user_id_by_session_id[ses_id] = 'session_dict'
+        self.user_id_by_session_id[ses_id] = session_dict
         return ses_id
 
     def user_id_for_session_id(self, session_id=None):
