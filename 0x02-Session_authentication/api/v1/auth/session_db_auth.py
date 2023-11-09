@@ -4,6 +4,7 @@ from api.v1.auth.session_exp_auth import SessionExpAuth
 from models.user_session import UserSession
 from datetime import datetime, timedelta
 
+
 class SessionDBAuth(SessionExpAuth):
     """ defines the class """
     def create_session(self, user_id=None):
@@ -32,7 +33,8 @@ class SessionDBAuth(SessionExpAuth):
             return None
         user_ses = user_ses[0]
 
-        exp_time = user_ses.created_at + timedelta(seconds=self.session_duration)
+        exp_time = user_ses.created_at +\
+            timedelta(seconds=self.session_duration)
 
         if exp_time < datetime.now():
             return None
@@ -43,7 +45,7 @@ class SessionDBAuth(SessionExpAuth):
         """ deletes a session from the database """
         if request is None:
             return False
-        
+
         session_id = self.session_cookie(request)
 
         if session_id is None:
