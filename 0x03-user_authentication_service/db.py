@@ -47,7 +47,7 @@ class DB:
         except Exception:
             return None
 
-    def find_user_by(self, **kwargs: dict) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """ Finds a user in the db based on the keyword argument """
         try:
             user = self._session.query(User).filter_by(**kwargs).first()
