@@ -37,8 +37,10 @@ class DB:
                 return None
 
             user = User(email=email, hashed_password=hashed_password)
-            self._session.add(user)
-            self._session.commit()
+            DBSession = sessionmaker(bind=self._engine)
+            self.__session = DBSession()
+            self.__session.add(user)
+            self.__session.commit()
             return user
         except Exception:
             return None
