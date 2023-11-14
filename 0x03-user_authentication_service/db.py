@@ -42,6 +42,11 @@ class DB:
 
     def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """ Finds a user in the db based on the keyword argument """
+        if kwargs is None:
+            raise InvalidRequestError
+        for key in kwargs.keys():
+            if not hasattr(User, key):
+                raise InvalidRequestError
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
         except NoResultFound:
