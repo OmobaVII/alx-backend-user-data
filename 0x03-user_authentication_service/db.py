@@ -57,7 +57,7 @@ class DB:
 
     def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """Find a user by specified attributes.
-        
+
         Raises:
             error: NoResultFound: When no results are found.
             error: InvalidRequestError: When invalid query arguments are passed
