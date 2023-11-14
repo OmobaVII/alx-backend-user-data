@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def payload() -> str:
+def welcome() -> str:
     """ returns a jsonify payload """
     return jsonify({"message": "Bienvenue"})
 
