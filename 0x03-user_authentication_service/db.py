@@ -9,7 +9,6 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 
 from user import Base, User
-from typing import Dict
 
 
 class DB:
@@ -42,15 +41,10 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """ Finds a user in the db based on the keyword argument """
-        if kwargs is None:
-            raise InvalidRequestError
-        for key in kwargs.keys():
-            if not hasattr(User, key):
-                raise InvalidRequestError
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
         except NoResultFound:
-            raise NoResultFound
+            raise
         except InvalidRequestError:
-            raise InvalidRequestError
+            raise
         return user
