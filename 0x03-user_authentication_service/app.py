@@ -13,6 +13,7 @@ def welcome() -> str:
     """ returns a jsonify payload """
     return jsonify({"message": "Bienvenue"})
 
+
 @app.route("/users", methods=["POST"])
 def users() -> str:
     """ register a user to database """
