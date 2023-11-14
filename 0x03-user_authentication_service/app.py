@@ -2,6 +2,7 @@
 """ Sets up a basic Flask app
 """
 from flask import Flask, jsonify, request, abort, make_response
+from flask import redirect
 from auth import Auth
 
 AUTH = Auth()
@@ -41,6 +42,16 @@ def login() -> str:
     response.set_cookie("session_id", session_id)
 
     return response
+
+@app.route("/sessions", methods=["DELETE"])
+def logout():
+    """ logout a session """
+    session_id = request.form.get("session_id")
+    try:
+        user = AUTH.get_user_from_session_id(session_id)
+        destroy_session(user.id)
+    except Exception:
+        return redirect("/"), 403
 
 
 if __name__ == "__main__":
