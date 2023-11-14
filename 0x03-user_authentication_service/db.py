@@ -45,12 +45,13 @@ class DB:
             raise
         return user
 
-    def find_user_by(self, **kwargs) -> User:
+    def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """ Finds a user in the db based on the keyword argument """
+        ses = self._session
         try:
-            user = self._session.query(User).filter_by(**kwargs).one()
-            return user
+            user = ses.query(User).filter_by(**kwargs).one()
         except NoResultFound:
             raise NoResultFound()
         except InvalidRequestError:
             raise InvalidRequestError()
+        return user
