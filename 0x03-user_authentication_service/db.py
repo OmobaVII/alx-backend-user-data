@@ -34,25 +34,21 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """ save the user to the database """
+        user = User(email=email, hashed_password=hashed_password)
         try:
-            if email is None or hashed_password is None:
-                return
-
-            user = User(email=email, hashed_password=hashed_password)
-            if user is None:
-                return
             self._session.add(user)
             self._session.commit()
-            return user
         except Exception:
-            return None
+            self._session.rollback()
+            raise
+        return user
 
     def find_user_by(self, **kwargs) -> User:
         """ Finds a user in the db based on the keyword argument """
         try:
-            user = self._session.query(User).filter_by(**kwargs).first()
-            if user is None:
-                raise NoResultFound
-            return user
+            user = self._session.query(User).filter_by(**kwargs).one()
+        except NoResultFound:
+            raise NoResultFound()
         except InvalidRequestError:
-            raise
+            raise InvalidRequestError()
+        return user
