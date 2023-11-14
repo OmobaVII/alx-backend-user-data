@@ -34,7 +34,7 @@ class DB:
         """ save the user to the database """
         try:
             if email is None or hashed_password is None:
-            return None
+                return None
 
             user = User(email=email, hashed_password=hashed_password)
             self._session.add(user)
