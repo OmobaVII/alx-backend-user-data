@@ -38,12 +38,13 @@ class DB:
         try:
             self._session.add(user)
             self._session.commit()
-        except Exception:
+        except Exception as e:
+            print("Error adding user to database: {}".format(e))
             self._session.rollback()
             raise
         return user
 
-    def find_user_by(self, **kwargs) -> User:
+    def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """ Finds a user in the db based on the keyword argument """
         try:
             user = self._session.query(User).filter_by(**kwargs).one()
