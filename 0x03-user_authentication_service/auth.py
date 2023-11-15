@@ -100,7 +100,7 @@ class Auth:
         """ updates the password of a user """
         try:
             user = self._db.find_user_by(reset_token=reset_token)
-        exception Exception:
+        exception NoResultFound:
             raise ValueError
         pwd = _hash_password(password)
         self._db.update_user(user.id, hashed_password=pwd, reset_token=None)
